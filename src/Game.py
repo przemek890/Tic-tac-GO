@@ -1,4 +1,4 @@
-import Front.Front as front
+import front.Front as front
 import src.Click as click
 import src.AI as ai
 import pygame
@@ -28,9 +28,6 @@ class Game:
                         poz = click.Click()
                         poz.get_position()
                         self.circle_cross(poz.pozycja,self.map)
-                        result = self.PC.check_win(self.map)
-                        if result is not None:
-                            self.screen.blit(self.interface.x, (300, 655))
             else:
                 score = self.PC.minimax(self.map, 9, True)
                 if(score[1] != None):
@@ -38,9 +35,21 @@ class Game:
                     self.circle_cross(pozycja,self.map)
                     result = self.PC.check_win(self.map)
                     if result is not None:
-                        self.screen.blit(self.interface.o, (300, 652))
                         self.turn = True
 
+            result = self.PC.check_win(self.map)
+            if result == "X":
+                self.screen.blit(self.interface.x, (420, 649))
+            elif result == "O":
+                self.screen.blit(self.interface.o, (420, 649))
+            else:
+                pp = 0
+                for i in self.map:
+                    for j in i:
+                        if j == ' ':
+                            pp = pp + 1
+                if(pp == 0):
+                    self.screen.blit(self.interface.draw, (420, 665))
 
             # ---------------------------------------
             for event in pygame.event.get():
@@ -53,7 +62,6 @@ class Game:
             game = Game(screen)
             game.loop(screen)
         else:
-            print(pom)
             pygame.quit()
     # ------
     def circle_cross(self,pozycja,map):
