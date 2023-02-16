@@ -1,22 +1,29 @@
-import Fronted.Front as front
+import Front.Front as front
 import src.Click as click
 import src.AI as ai
 import pygame
 #--------
 class Game:
     def __init__(self, screen):
-        self.map = [['', '', ''], ['', '', ''], ['', '', '']]
+        self.map = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
         self.screen = screen
         self.interface = front.Frontend(self.screen)
         self.PC = ai.AI(screen,self.map)
         self.turn = False
-    def loop(self):
+
+    def loop(self,screen):
         running = True
+        pom = 0
         while running:
             pygame.display.update()
             if (self.turn == False):
                 for event in pygame.event.get():
+                    poz = click.Click()
+                    poz.get_position()
                     if event.type == pygame.QUIT: running = False
+                    elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                        pom += 1
+                        running = False
                     elif event.type == pygame.MOUSEBUTTONDOWN:
                         poz = click.Click()
                         poz.get_position()
@@ -34,12 +41,23 @@ class Game:
                         self.screen.blit(self.interface.o, (300, 652))
                         self.turn = True
 
+
             # ---------------------------------------
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                    pom += 1
+                    running = False
+
+        if(pom == 1):
+            game = Game(screen)
+            game.loop(screen)
+        else:
+            print(pom)
+            pygame.quit()
     # ------
     def circle_cross(self,pozycja,map):
-        if (pozycja == "A1" and map[0][0] == ''):
+        if (pozycja == "A1" and map[0][0] == ' '):
             x = 84 + 84 - 172 / 2
             y = 46 + 84 - 172 / 2
             if(self.turn == False):
@@ -50,7 +68,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[0][0] = "O"
                 self.turn = False
-        elif (pozycja == "A2" and map[0][1] == ''):
+        elif (pozycja == "A2" and map[0][1] == ' '):
             x = 84 + 84 - 172 / 2
             y = 46 + 84 * 3 - 172 / 2 + 25
             if (self.turn == False):
@@ -61,7 +79,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[0][1] = "O"
                 self.turn= False
-        elif (pozycja== "A3" and map[0][2] == ''):
+        elif (pozycja== "A3" and map[0][2] == ' '):
             x = 84 + 84 - 172 / 2
             y = 46 + 84 * 5 - 172 / 2 + 25 * 2
             if (self.turn == False):
@@ -72,7 +90,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[0][2] = "O"
                 self.turn = False
-        elif (pozycja== "B1" and map[1][0] == ''):
+        elif (pozycja== "B1" and map[1][0] == ' '):
             x = 84 + 84 * 3 - 172 / 2 + 25
             y = 46 + 84 - 172 / 2
             if (self.turn == False):
@@ -83,7 +101,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[1][0] = "O"
                 self.turn = False
-        elif (pozycja == "B2" and map[1][1] == ''):
+        elif (pozycja == "B2" and map[1][1] == ' '):
             x = 84 + 84 * 3 - 172 / 2 + 25
             y = 46 + 84 * 3 - 172 / 2 + 25
             if (self.turn== False):
@@ -94,7 +112,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[1][1] = "O"
                 self.turn = False
-        elif (pozycja == "B3" and map[1][2] == ''):
+        elif (pozycja == "B3" and map[1][2] == ' '):
             x = 84 + 84 * 3 - 172 / 2 + 25
             y = 46 + 84 * 5 - 172 / 2 + 25 * 2
             if (self.turn== False):
@@ -105,7 +123,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[1][2] = "O"
                 self.turn = False
-        elif (pozycja == "C1" and map[2][0] == ''):
+        elif (pozycja == "C1" and map[2][0] == ' '):
             x = 84 + 84 * 5 - 172 / 2 + 25 * 2
             y = 46 + 84 - 172 / 2
             if(self.turn == False):
@@ -116,7 +134,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[2][0] = "O"
                 self.turn = False
-        elif (pozycja == "C2" and map[2][1] == ''):
+        elif (pozycja == "C2" and map[2][1] == ' '):
             x = 84 + 84 * 5 - 172 / 2 + 25 * 2
             y = 46 + 84 * 3 - 172 / 2 + 25
             if (self.turn == False):
@@ -127,7 +145,7 @@ class Game:
                 self.screen.blit(self.interface.circle, (x, y))
                 map[2][1] = "O"
                 self.turn = False
-        elif (pozycja == "C3" and map[2][2] == ''):
+        elif (pozycja == "C3" and map[2][2] == ' '):
             x = 84 + 84 * 5 - 172 / 2 + 25 * 2
             y = 46 + 84 * 5 - 172 / 2 + 25 * 2
             if (self.turn == False):

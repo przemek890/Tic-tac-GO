@@ -23,5 +23,3 @@ class Click:
             self.pozycja = "C2"
         elif(cursor[0] > 84 + 172 * 2 + 25 * 2 and cursor[0] < 84 + 172 * 3 + 25 * 2  and cursor[1] > 46 + 172 * 2 + 25 * 2 and cursor[1] < 46 + 172 * 3 + 25 * 2 ):
             self.pozycja = "C3"
-        elif (cursor[0] > 338 and cursor[0] < 457 and cursor[1] > 700 and cursor[1] < 730):
-            self.pozycja = "RESET"

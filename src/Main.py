@@ -9,6 +9,6 @@ def main():
     screen = pygame.display.set_mode((screen_height - screen_height / 5, screen_height - screen_height / 5))
     #--------------------------------------------------
     game = gm.Game(screen)
-    game.loop()
+    game.loop(screen)
 
 main()
