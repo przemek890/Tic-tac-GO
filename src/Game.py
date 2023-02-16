@@ -4,19 +4,20 @@ import src.AI as ai
 import pygame
 #--------
 class Game:
-    def __init__(self, screen):
+    def __init__(self, screen,start):
         self.map = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
         self.screen = screen
         self.interface = front.Frontend(self.screen)
         self.PC = ai.AI(screen,self.map)
         self.turn = False
+        self.start = start
 
     def loop(self,screen):
         running = True
         pom = 0
         while running:
             pygame.display.update()
-            if (self.turn == False):
+            if (self.turn == self.start):
                 for event in pygame.event.get():
                     poz = click.Click()
                     poz.get_position()
@@ -29,13 +30,19 @@ class Game:
                         poz.get_position()
                         self.circle_cross(poz.pozycja,self.map)
             else:
-                score = self.PC.minimax(self.map, 9, True)
+                if(self.start == False):
+                    score = self.PC.minimax(self.map, 9, True,'O','X')
+                else:
+                    score = self.PC.minimax(self.map, 9, True, 'X', 'O')
                 if(score[1] != None):
                     pozycja = str(chr(score[1][0] + 65)) + str(score[1][1] + 1)
                     self.circle_cross(pozycja,self.map)
                     result = self.PC.check_win(self.map)
                     if result is not None:
-                        self.turn = True
+                        if self.turn == self.start:
+                            self.turn = not self.start
+                        else:
+                            self.turn = self.start
 
             result = self.PC.check_win(self.map)
             if result == "X":
@@ -59,7 +66,7 @@ class Game:
                     running = False
 
         if(pom == 1):
-            game = Game(screen)
+            game = Game(screen,not self.start)
             game.loop(screen)
         else:
             pygame.quit()

@@ -24,11 +24,11 @@ class AI:
                 if board[i][j] == ' ':
                     return None
         return 'tie'
-    def minimax(self,board, depth, is_maximizing):
+    def minimax(self,board, depth, is_maximizing,znak_1,znak_2):
         # Sprawdź, czy gra została zakończona lub osiągnięto maksymalną głębokość rekursji.
         result = self.check_win(self.board)
         if result is not None:
-            score = 10 - depth if result == 'O' else depth - 10 if result == 'X' else 0
+            score = 10 - depth if result == znak_1 else depth - 10 if result == znak_2 else 0
             return score, None
         if depth == 0:
             return 0, None
@@ -37,8 +37,8 @@ class AI:
         best_score = float('-inf') if is_maximizing else float('inf')
         best_move = None
         for i, j in self.get_empty_cells(board):
-            board[i][j] = 'O' if is_maximizing else 'X'
-            score, _ = self.minimax(board, depth - 1, not is_maximizing)
+            board[i][j] = znak_1 if is_maximizing else znak_2
+            score, _ = self.minimax(board, depth - 1, not is_maximizing,znak_1,znak_2)
             board[i][j] = ' '
             if is_maximizing and score > best_score:
                 best_score, best_move = score, (i, j)
