@@ -26,6 +26,13 @@ class AI:
         return 'tie'
     def minimax(self,board, depth, is_maximizing,znak_1,znak_2):
         # Sprawdź, czy gra została zakończona lub osiągnięto maksymalną głębokość rekursji.
+        pom = 0
+        for i in board:
+            for j in i:
+                if j == ' ':
+                    pom += 1
+        if(pom == 9): return float('inf') ,(1,1)
+
         result = self.check_win(self.board)
         if result is not None:
             score = 10 - depth if result == znak_1 else depth - 10 if result == znak_2 else 0

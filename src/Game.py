@@ -173,9 +173,6 @@ class Game:
                 self.turn = False
         else:
             print("Blad pobierania pozycji - sprobuj ponownie!")
-            return -1
-
-        return 1
 
 
 
