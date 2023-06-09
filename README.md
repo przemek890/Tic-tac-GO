@@ -6,5 +6,5 @@ For the correct operation of the program it is necessary:
 
 ![Simple Checkers](doc/tictactoe.gif)
 
-> Press [R] to reset the game
+> Press R to reset the game
 
