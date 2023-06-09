@@ -6,5 +6,5 @@ For the correct operation of the program it is necessary:
 
 ![Simple Checkers](doc/tictactoe.gif)
 
-> Press the r key to reset the game
+> Press the <button onclick="window.location.reload()">R</button> key to reset the game
 
