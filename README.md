@@ -8,3 +8,5 @@ For the correct operation of the program it is necessary:
 
 > Press R to reset the game
 
+> Press Q to exit the game
+
