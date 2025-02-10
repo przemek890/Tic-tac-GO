@@ -1,7 +1,7 @@
 import pygame
 import os
-from UI.fr import Draw
-from src.Game import Game
+from Draw import Draw
+from Game import Game
 """"""""""""""""""""""""""
 def main():
     pygame.init()

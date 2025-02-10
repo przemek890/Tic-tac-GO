@@ -1,4 +1,4 @@
-from src.AI import AI
+from AI import AI
 """"""""""""""""""""""""
 class Game:
     def __init__(self, screen, draw):

@@ -1,8 +1,13 @@
-# TIC_TAC_TOE
+# TIC_TAC_GO
 
-For the correct operation of the program it is necessary:
+1. Install Poetry following the [official documentation](https://python-poetry.org/docs/#installation)
+2. Run these commands in project directory:
+```bash
+poetry install
+poetry run python main.py
+```
 
---> install python package 📦 : pygame 
+---
 
 ![Simple Checkers](doc/tictactoe.gif)
 
